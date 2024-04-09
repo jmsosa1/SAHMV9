@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SAHMV8.Data;
+using SAHMV8.AccesoDatos.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +38,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Abastecimiento}/{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();

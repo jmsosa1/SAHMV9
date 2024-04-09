@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using SAHMV8.Models;
+using SAHMV8.Modelos.ViewModels;
+
 using System.Diagnostics;
 
-namespace SAHMV8.Controllers
+namespace SAHMV8.Areas.Abastecimiento.Controllers
 {
+    [Area("Abastecimiento")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
