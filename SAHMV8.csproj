@@ -31,7 +31,6 @@
     <Folder Include="Areas\Departamento\Controllers\" />
     <Folder Include="Areas\Flota\Controllers\" />
     <Folder Include="Areas\Laboratorio\Controllers\" />
-    <Folder Include="Areas\Laboratorio\Views\" />
     <Folder Include="Areas\Obras\Controllers\" />
     <Folder Include="Areas\Rrhh\Controllers\" />
   </ItemGroup>
