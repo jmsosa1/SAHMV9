@@ -1,0 +1,75 @@
+﻿@model SAHMV8.Modelos.Deposito
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var titulo = "Crear Deposito";
+}
+
+<form action="/" method="post"> 
+    <div style="padding-left: 15%; padding-right:15%; padding-bottom:inherit.4rem">
+        <div class="row border-0">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+        @if (Model.Iddeposito!=0)
+        {
+            //actualizar deposito
+            titulo = "Actualizar Deposito";
+            <input type="hidden" asp-for="Iddeposito" />
+
+        }
+        <div class="col-12 border-bottom p-0">
+            <h2 class="text-primary">@titulo</h2>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Nombre</label>
+                <input type="text" asp-for="Nomdepo" class="form-control" placeholder="Nombre Deposito"/>
+                <span asp-validation-for="Nomdepo" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Direccion</label>
+                <input type="text" asp-for="Direccion" class="form-control" placeholder="Direccion" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Responsable</label>
+                <input type="text" asp-for="Responsable" class="form-control" placeholder="Responsable" />
+                <span asp-validation-for="Responsable" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Email</label>
+                <input type="text" asp-for="Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="form-group col-md-6">
+                <label>Telefono</label>
+                <input type="text" asp-for="Tel1" class="form-control" placeholder="Telefono" />
+                <span asp-validation-for="Tel1" class="text-danger"></span>
+            </div>
+        </div>
+        <br/>
+        <div>
+            @if (Model.Iddeposito!= 0)
+            {
+                <partial name="_BotonesActualizarYRegresar"/>
+            }
+            else
+            {
+                <partial name="_BotonesCrearYRegresar"/>
+            }
+        </div>
+    </div>
+</form> 
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}
+
