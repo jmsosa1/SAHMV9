@@ -51,17 +51,30 @@ function loadDataTable() {
 
 }
 
-/* 
-     "iddeposito": 1,
-                "nomdepo": "Deposito Herramientas",
-                "direccion": "Calle 1 y 2",
-                "idlocalidad": 2,
-                "responsable": "Javier Puchetta",
-                "email": "javierpuchetta@electroluz.com.ar",
-                "tel1": "nada",
-                "idprovincia": 1,
-                "estado": 1,
-                "altaf": "2019-10-01",
-                "bajaf": null,
-                "imputacion": null
-*/
+function Delete(url) {
+    swal({
+        title: "Esta seguro de eliminar el deposito?",
+        text: "Este recurso no se podra recuperar",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    }).then((borrar) => {
+        if (borrar) {
+            $.ajax({
+                type: "POST",
+                url: url,
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        data.ajax.reload();
+                    } else {
+                        toastr.error(dat.message);
+
+                    }
+                }
+            });
+        }
+     }
+        
+    );
+}

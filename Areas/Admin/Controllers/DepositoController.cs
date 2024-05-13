@@ -35,12 +35,45 @@ namespace SAHMV8.Areas.Admin.Controllers
             return View(deposito);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult>Upsert(Deposito deposito)
+        {
+            if (ModelState.IsValid)
+            {
+                if (deposito.Iddeposito == 0)
+                {
+                    await _unidadTrabajo.Deposito.Agregar(deposito);
+                }
+                else
+                {
+                    _unidadTrabajo.Deposito.Actualizar(deposito);
+                }
+                await _unidadTrabajo.Guardar();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(deposito);
+        }
+
         #region API
         [HttpGet]
         public async Task<IActionResult> ObtenerTodos()
         {
             var todos = await _unidadTrabajo.Deposito.ObtenerTodos();
             return Json(new { data = todos }); // el nombre data es el que usaremos en javascript para referencial al conjunto de datos que devuelve el metodo
+        }
+
+        [HttpPost]
+        public async  Task<IActionResult>Delete (int id)
+        {
+            var dep = await _unidadTrabajo.Deposito.Obtener(id);
+            if (dep.Iddeposito == null)
+            {
+                return Json(new {success  = false,message = "Error al borrar la bodega"});
+            }
+            _unidadTrabajo.Deposito.Remover(dep);
+            await _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Bodega borrada exitosamente" });
         }
         #endregion
     }
