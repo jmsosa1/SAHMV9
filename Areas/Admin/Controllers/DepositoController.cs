@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SAHMV8.AccesoDatos.Repositorio.IRepositorio;
 using SAHMV8.Modelos;
+using SAHMV8.Utilidades;
 
 namespace SAHMV8.Areas.Admin.Controllers
 {
@@ -44,14 +45,17 @@ namespace SAHMV8.Areas.Admin.Controllers
                 if (deposito.Iddeposito == 0)
                 {
                     await _unidadTrabajo.Deposito.Agregar(deposito);
+                    TempData[DS.Exitosa] = "Depósito creado exitosamente";
                 }
                 else
                 {
                     _unidadTrabajo.Deposito.Actualizar(deposito);
+                    TempData[DS.Exitosa] = "Depósito creado exitosamente";
                 }
                 await _unidadTrabajo.Guardar();
                 return RedirectToAction(nameof(Index));
             }
+            TempData[DS.Error] = "Error al grabar el deposito";
             return View(deposito);
         }
 

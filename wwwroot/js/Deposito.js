@@ -66,15 +66,14 @@ function Delete(url) {
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.message);
-                        data.ajax.reload();
+                        datatable.ajax.reload();
                     } else {
                         toastr.error(dat.message);
-
                     }
                 }
             });
         }
-     }
-        
-    );
+    });
+
 }
+
