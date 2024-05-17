@@ -79,6 +79,26 @@ namespace SAHMV8.Areas.Admin.Controllers
             await _unidadTrabajo.Guardar();
             return Json(new { success = true, message = "Bodega borrada exitosamente" });
         }
+
+        [ActionName ("ValidarNombre")]
+        public async Task<IActionResult>ValidarNombre(string nombre,int id=0)
+        {
+            bool valor = false;
+            var lista = await _unidadTrabajo.Deposito.ObtenerTodos();
+            if (id==0)
+            {
+                valor = lista.Any(d => d.Nomdepo.ToLower().Trim() == nombre.ToLower().Trim());
+            }
+            else
+            {
+                valor = lista.Any(d => d.Nomdepo.ToLower().Trim() == nombre.ToLower().Trim() && d.Iddeposito != id);
+            }
+            if (valor)
+            {
+                return Json(new { data = true });
+            }
+            return Json(new { data = false });
+        }
         #endregion
     }
 }

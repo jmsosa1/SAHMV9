@@ -14,7 +14,7 @@
         {
             //actualizar deposito
             titulo = "Actualizar Deposito";
-            <input type="hidden" asp-for="Iddeposito" />
+            <input type="hidden" asp-for="Iddeposito" id="id"/>
 
         }
         <div class="col-12 border-bottom p-0">
@@ -23,7 +23,7 @@
         <div class="row mb-2 mt-2">
             <div class="form-group col-md-6">
                 <label>Nombre</label>
-                <input type="text" asp-for="Nomdepo" class="form-control" placeholder="Nombre Deposito"/>
+                <input type="text" asp-for="Nomdepo" class="form-control" placeholder="Nombre Deposito" id="nombre"/>
                 <span asp-validation-for="Nomdepo" class="text-danger"></span>
             </div>
         </div>
@@ -71,5 +71,26 @@
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial"/>
+    <script>
+        // bloque de java que se utiliza para validar el nombre que se ingresa , mediante una funcion que llama al metodo en el controlador
+        // cada vez que el elemento "nombre" cambia de valor 
+        document.getElementById("nombre").addEventListener('change', function () {
+            validarNombre();
+        });
+        function validarNombre()
+        {
+            var url = '@Url.Content("~/")' + "Admin/Deposito/ValidarNombre";
+            var id = '#id';
+            var nombre = '#nombre';
+            $.getJSON(url, { id: $(id).val(), nombre: $(nombre).val() }, function data{
+                $.each(data, function (key, value) {
+                    if (value) {
+                        var nombre: document.getElementById("nombre");
+                        swal("Error", "Nombre ya existe", "error");
+                        nombre.value = "";
+                    }
+                });
+            })
+    </script>
 }
 
